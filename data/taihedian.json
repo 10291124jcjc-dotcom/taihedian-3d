@@ -1,0 +1,546 @@
+{
+ "units": "metres; x east, z south (front), y up; origin = centre of the hall floor (台明); 1 清尺 = 0.32 m",
+ "sourceTags": {
+  "record": "《太和殿纪事》 via 王子林 2020 / 刘畅",
+  "dpm": "故宫博物院官网",
+  "photo": "measured on public photos",
+  "rule": "清工部《工程做法》 proportion",
+  "fit": "fitted to photos"
+ },
+ "params": {
+  "bayW": {
+   "value": [
+    11.1,
+    26.35,
+    17.3
+   ],
+   "source": "record",
+   "note": "面阔：两边间 11.1 尺、明间 26.35 尺、次间 8×17.3 尺"
+  },
+  "bayD": {
+   "value": [
+    11.1,
+    34.85,
+    23.27
+   ],
+   "source": "record",
+   "note": "进深：两边间 11.1 尺、山明间 34.85 尺、两次间 23.27 尺"
+  },
+  "eaveColH": {
+   "value": 7.36,
+   "source": "record",
+   "note": "檐柱高二丈三尺 = 7.36 m"
+  },
+  "eaveColD": {
+   "value": 0.64,
+   "source": "photo",
+   "note": "檐柱径：close_up-1 中 845 px = 明间 8.432 m，柱宽约 64 px"
+  },
+  "goldColD": {
+   "value": 1.024,
+   "source": "record",
+   "note": "金柱径三尺二寸 = 1.024 m"
+  },
+  "doukou": {
+   "value": 0.08518181818181819,
+   "source": "photo",
+   "note": "斗口：明间下檐 8 攒平身科 = 9 攒当，8.432/9 = 0.937 m，按攒当 11 斗口反推 = 0.085 m；文献称用材不足三寸"
+  },
+  "rafterPitch": {
+   "value": 0.27,
+   "source": "photo",
+   "note": "椽当：明间约 31 根飞椽头"
+  },
+  "rafterD": {
+   "value": 0.17,
+   "source": "photo",
+   "note": "椽径：close_up-1 中椽头约 17–18 px（0.0099 m/px）；规则值 1.5 斗口 = 0.128 m 偏细"
+  },
+  "tileRow": {
+   "value": 0.36,
+   "source": "photo",
+   "note": "瓦陇距：gje06 正立面下檐勾头行自相关周期 0.366 m（含近大透视约 −2%）；与《太和殿纪事》下檐勾头 586、上檐勾滴 1008 件反推的 0.352–0.357 m 吻合"
+  },
+  "lowerPitch": {
+   "value": 0.5,
+   "source": "rule",
+   "note": "下檐檐步五举"
+  },
+  "flyPitch": {
+   "value": 0.3,
+   "source": "rule",
+   "note": "飞椽较檐椽平缓"
+  },
+  "eaveOut": {
+   "value": 21,
+   "source": "rule",
+   "note": "上檐出：挑檐桁中至飞椽头 21 斗口（檐椽 14 + 飞椽 7）"
+  },
+  "bracketOut": {
+   "value": 9,
+   "source": "rule",
+   "note": "七踩斗拱出 3 拽架 × 3 斗口 = 9 斗口"
+  },
+  "bracketH": {
+   "value": 12,
+   "source": "photo",
+   "note": "平板枋上皮至挑檐桁底约 12 斗口：照片中斗拱带高 ≈ 1.1 × 攒当"
+  },
+  "wingOut": {
+   "value": 4.5,
+   "source": "rule",
+   "note": "翼角冲出 3 椽径 = 4.5 斗口（冲三）"
+  },
+  "wingUp": {
+   "value": 6,
+   "source": "rule",
+   "note": "翼角起翘 4 椽径 = 6 斗口（翘四）"
+  },
+  "upperColH": {
+   "value": 12.64,
+   "source": "record",
+   "note": "金柱长三丈九尺五寸 = 12.64 m，取作上檐柱顶（上檐平板枋底）"
+  },
+  "lowerInPitch": {
+   "value": 0.4,
+   "source": "fit",
+   "note": "下檐檐步（檐柱→金柱承椽枋）四举：五举会使围脊顶 12.0 m 高过上檐小额枋底 11.6 m，照片中二者之间可见完整额枋带"
+  },
+  "ridgeTop": {
+   "value": 26.92,
+   "source": "dpm",
+   "note": "正脊顶 = 官网殿高 26.92 m（官网通高 35.05 = 26.92 + 台基 8.13）。照片核对：gje06 以 8 个地标拟合机位（距殿中心 191 m、低于殿地面 1.3 m、俯 1.5°，上下檐口残差 ≤ 5 px），得正脊顶 26.3 m。《太和殿纪事》正中高 23.87 m 应为脊桁高"
+  },
+  "ridgeH": {
+   "value": 1.3,
+   "source": "photo",
+   "note": "正脊露明高约 1.3 m：gje06 中约 40 px（z=0 处 32.3 px/m）"
+  },
+  "ridgeHalf": {
+   "value": 13.75,
+   "source": "photo",
+   "note": "正脊半长（至正吻中线）：gje06 两吻中距约 690 px = 27.5 m；含推山"
+  },
+  "upperJu": {
+   "value": [
+    0.42,
+    0.47,
+    0.55,
+    0.63,
+    0.73
+   ],
+   "source": "fit",
+   "note": "上檐五步举架：使脊桁高与正中高 23.87 m 吻合（照片中屋面下凹、上陡）"
+  },
+  "wingStartUp": {
+   "value": 2.6,
+   "source": "rule",
+   "note": "上檐翼角自第一步架起翘"
+  },
+  "doorH": {
+   "value": 5.1,
+   "source": "photo",
+   "note": "隔扇高：close_up-3 中隔扇顶低于小额枋底约 1.24 m"
+  },
+  "sillWallH": {
+   "value": 1.05,
+   "source": "photo",
+   "note": "槛墙高：close_up-3 右端槛墙约 90 px（≈ 85 px/m）"
+  },
+  "windowBays": {
+   "value": [
+    "边间",
+    "四次间"
+   ],
+   "source": "record",
+   "note": "《太和殿纪事》\"前槛墙四堵\"，close_up-3 右端可见槛窗与琉璃槛墙；具体为哪四间待核"
+  },
+  "plaque": {
+   "value": [
+    2.2,
+    2.6
+   ],
+   "source": "photo",
+   "note": "匾额宽 × 高：gje06 约 55 × 65 px"
+  },
+  "queti": {
+   "value": [
+    0.26,
+    0.7
+   ],
+   "source": "photo",
+   "note": "雀替长（占开间比例）× 高 (m)：close_up-3"
+  },
+  "beasts": {
+   "value": [
+    "龙",
+    "凤",
+    "狮子",
+    "天马",
+    "海马",
+    "狻猊",
+    "押鱼",
+    "獬豸",
+    "斗牛",
+    "行什"
+   ],
+   "source": "dpm",
+   "note": "仙人 + 10 走兽，顺序见《大清会典》转述（待核）"
+  },
+  "beastH": {
+   "value": 0.5,
+   "source": "photo",
+   "note": "走兽高约 0.5 m：roof_art-1 中约为勾头间距的 1.25 倍"
+  },
+  "beastGap": {
+   "value": 0.53,
+   "source": "photo",
+   "note": "走兽间距约 0.53 m：约为勾头间距的 1.3 倍"
+  },
+  "tileColor": {
+   "value": "#A9650A",
+   "source": "photo",
+   "note": "琉璃瓦在晴天侧光下的受光面颜色（roof_art-1 取样）"
+  }
+ },
+ "columnLines": {
+  "x": [
+   -29.912,
+   -26.36,
+   -20.824,
+   -15.288,
+   -9.752,
+   -4.216,
+   4.216,
+   9.752,
+   15.288,
+   20.824,
+   26.36,
+   29.912
+  ],
+  "z": [
+   -16.574,
+   -13.022,
+   -5.576,
+   5.576,
+   13.022,
+   16.574
+  ]
+ },
+ "derived": {
+  "doukou": 0.085,
+  "heights": {
+   "lowerEave": 8.668,
+   "upperEave": 14.17,
+   "weiJiTop": 11.757,
+   "upperBeamBottom": 11.618,
+   "ridgeTop": 26.9,
+   "wenTop": 29.041
+  },
+  "upperRoofRiseScale": 1.406,
+  "upperRoofTuishanK": 1.033
+ },
+ "counts": {
+  "bracketSetsExterior": 372,
+  "lower": 202,
+  "upper": 170,
+  "rafters": 2820,
+  "tiles": {
+   "lo": {
+    "tong": 8534,
+    "ban": 21624,
+    "goutou": 568,
+    "dishui": 568
+   },
+   "up": {
+    "tong": 14126,
+    "ban": 36118,
+    "goutou": 492,
+    "dishui": 496
+   }
+  },
+  "balustradePosts": 1251,
+  "chishou": 1175,
+  "ding": 18
+ },
+ "terrace": {
+  "tierHeights": [
+   4.2,
+   2.1,
+   1.83
+  ],
+  "tiers": [
+   [
+    [
+     -160.83,
+     -79.46,
+     66.3
+    ],
+    [
+     -79.46,
+     -50.34,
+     36.1
+    ],
+    [
+     -50.34,
+     33.41,
+     66.3
+    ],
+    [
+     33.41,
+     69.2,
+     44.21
+    ]
+   ],
+   [
+    [
+     -153.68,
+     -84.68,
+     58.51
+    ],
+    [
+     -84.68,
+     -44.18,
+     27.91
+    ],
+    [
+     -44.18,
+     27.94,
+     58.9
+    ],
+    [
+     27.94,
+     59.87,
+     38.48
+    ]
+   ],
+   [
+    [
+     -148.36,
+     -89.74,
+     53.59
+    ],
+    [
+     -89.74,
+     -38.99,
+     22.23
+    ],
+    [
+     -38.99,
+     21.39,
+     53.46
+    ],
+    [
+     21.39,
+     52.56,
+     32.9
+    ]
+   ]
+  ],
+  "stairs": [
+   [
+    -4.5,
+    52.5,
+    4.5,
+    84.2,
+    2,
+    3,
+    "S",
+    "yulu"
+   ],
+   [
+    8.2,
+    52.5,
+    13,
+    82.1,
+    2,
+    3,
+    "S",
+    "step"
+   ],
+   [
+    -13,
+    52.5,
+    -8.2,
+    82.1,
+    2,
+    3,
+    "S",
+    "step"
+   ],
+   [
+    33,
+    23.7,
+    37.1,
+    27.1,
+    2,
+    1,
+    "E",
+    "step"
+   ],
+   [
+    -37.1,
+    23.7,
+    -33,
+    27.1,
+    2,
+    1,
+    "W",
+    "step"
+   ],
+   [
+    40,
+    27.1,
+    43,
+    32.1,
+    1,
+    1,
+    "S",
+    "step"
+   ],
+   [
+    -43,
+    27.1,
+    -40,
+    32.1,
+    1,
+    1,
+    "S",
+    "step"
+   ],
+   [
+    43.8,
+    32.7,
+    53.7,
+    37.7,
+    0,
+    1,
+    "E",
+    "step"
+   ],
+   [
+    -53.7,
+    32.7,
+    -43.8,
+    37.7,
+    0,
+    1,
+    "W",
+    "step"
+   ],
+   [
+    58.8,
+    11.7,
+    62.6,
+    15.7,
+    1,
+    1,
+    "E",
+    "step"
+   ],
+   [
+    -62.6,
+    11.7,
+    -58.8,
+    15.7,
+    1,
+    1,
+    "W",
+    "step"
+   ]
+  ],
+  "balustrade": {
+   "post": 1.59,
+   "panel": 0.84,
+   "sp": 2.04,
+   "postW": 0.24,
+   "difu": 0.16,
+   "inset": 0.3
+  },
+  "note": "plan from OpenStreetMap building:part outlines (© OpenStreetMap contributors, ODbL), made symmetric, shifted 6.9 m north after checking Esri World Imagery"
+ },
+ "furnishings": {
+  "ding": [
+   [
+    49.6,
+    "tier3",
+    [
+     -22.9,
+     -15.3,
+     -5.9,
+     5.9,
+     15.3,
+     22.9
+    ]
+   ],
+   [
+    55.7,
+    "tier2",
+    [
+     -15.5,
+     -5.9,
+     5.9,
+     15.5
+    ]
+   ],
+   [
+    63.3,
+    "tier1",
+    [
+     -15.5,
+     -5.9,
+     5.9,
+     15.5
+    ]
+   ],
+   [
+    73.2,
+    "plaza",
+    [
+     -15.5,
+     -5.9,
+     5.9,
+     15.5
+    ]
+   ]
+  ],
+  "rigui": [
+   30,
+   50
+  ],
+  "jialiang": [
+   -30,
+   50
+  ],
+  "gui": [
+   [
+    -30.8,
+    31
+   ],
+   [
+    30.8,
+    31
+   ]
+  ],
+  "he": [
+   [
+    -30.8,
+    36
+   ],
+   [
+    30.8,
+    36
+   ]
+  ],
+  "note": "鼎 positions from satellite imagery; 龟/鹤 inferred from shadows (approximate)"
+ },
+ "photoCamera_gje06": {
+  "pos": [
+   1,
+   -1.3,
+   191.2
+  ],
+  "pitchDownDeg": 1.54,
+  "focalPx3840": 6197
+ }
+}

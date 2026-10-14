@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>太和殿 · 三维还原</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;900&display=swap" rel="stylesheet">
+<style>
+  :root { --ink: #F4ECDD; --mute: rgba(244,236,221,.7); --line: rgba(244,236,221,.18); --bg: rgba(20,16,12,.62); --red: #B8352A; }
+  html, body { margin: 0; height: 100%; background: #1a1612; overflow: hidden; font-family: "Noto Serif SC", "Source Han Serif SC", serif; color: var(--ink); }
+  canvas { display: block; width: 100vw !important; height: 100vh !important; }
+  #title { position: fixed; left: 28px; top: 22px; pointer-events: none; }
+  #title h1 { margin: 0; font-size: 40px; font-weight: 900; letter-spacing: .08em; text-shadow: 0 2px 12px rgba(0,0,0,.5); }
+  #title p { margin: 4px 0 0; font-size: 14px; color: var(--mute); text-shadow: 0 1px 6px rgba(0,0,0,.6); }
+  #title i { display: block; width: 44px; height: 4px; background: var(--red); margin-top: 10px; }
+  #views { position: fixed; left: 28px; bottom: 26px; display: flex; gap: 8px; flex-wrap: wrap; max-width: calc(100vw - 56px); }
+  button { font: inherit; font-size: 15px; color: var(--ink); background: var(--bg); border: 1px solid var(--line); padding: 8px 14px; border-radius: 3px; cursor: pointer; backdrop-filter: blur(6px); }
+  button:hover, button.on { border-color: var(--ink); }
+  #panel { position: fixed; right: 20px; top: 20px; width: 330px; max-height: calc(100vh - 40px); overflow: auto; background: var(--bg); border: 1px solid var(--line); border-radius: 4px; backdrop-filter: blur(8px); padding: 16px 18px; font-size: 13.5px; line-height: 1.65; }
+  #panel h2 { margin: 0 0 8px; font-size: 16px; }
+  #panel table { width: 100%; border-collapse: collapse; }
+  #panel td { padding: 5px 0; border-top: 1px solid var(--line); vertical-align: top; }
+  #panel td:first-child { color: var(--mute); width: 82px; }
+  #panel small { color: var(--mute); display: block; margin-top: 10px; font-size: 12px; }
+  #panel.hide { display: none; }
+  #loading { position: fixed; inset: 0; display: grid; place-items: center; font-size: 18px; color: var(--mute); background: #1a1612; }
+  @media (max-width: 760px) { #panel { width: auto; left: 16px; right: 16px; top: auto; bottom: 80px; max-height: 40vh; } #title h1 { font-size: 30px; } #views { left: 16px; } }
+</style></head>
+<body>
+<div id="loading">正在搭建太和殿……</div>
+<div id="title"><h1>太和殿</h1><p>按实测与档案数据用代码重建 · 拖动旋转，滚轮缩放</p><i></i></div>
+<div id="views">
+  <button data-v="oblique" class="on">斜角全景</button><button data-v="front">正立面</button><button data-v="corner">屋角走兽</button>
+  <button data-v="eave">檐下斗拱</button><button data-v="yuetai">月台陈设</button><button data-v="air">三台鸟瞰</button>
+  <button id="info">数据与出处</button>
+</div>
+<div id="panel" class="hide">
+  <h2>主要尺寸</h2>
+  <table>
+    <tr><td>形制</td><td>重檐庑殿顶；清康熙三十四年（1695）重建，三十六年竣工</td></tr>
+    <tr><td>面阔</td><td>11 间，59.82 m：明间 8.43 m，次间 5.54 m，边间 3.55 m</td></tr>
+    <tr><td>进深</td><td>5 间，33.15 m</td></tr>
+    <tr><td>高度</td><td>殿身 26.92 m，连台基通高 35.05 m；檐柱 7.36 m</td></tr>
+    <tr><td>柱</td><td>72 根：檐柱 32，金柱 40（径 1.02 m）</td></tr>
+    <tr><td>斗拱</td><td>下檐单翘重昂七踩，上檐单翘三昂九踩；外檐 372 攒（全殿约 650）</td></tr>
+    <tr><td>瓦</td><td>二样黄琉璃；勾头下檐 568 / 上檐 492（档案 586 / 约 504）</td></tr>
+    <tr><td>脊饰</td><td>正吻高 3.40 m；每条戗脊仙人 + 10 走兽</td></tr>
+    <tr><td>台基</td><td>三层汉白玉须弥座，高 8.13 m；螭首 1142</td></tr>
+    <tr><td>月台</td><td>铜鼎 18，日晷、嘉量各一，铜龟、铜鹤各一对</td></tr>
+  </table>
+  <small>出处：故宫博物院官网；王子林《清代太和殿的两次重建》（《故宫博物院院刊》2020-10，引《太和殿纪事》）；刘畅转引《太和殿纪事》各间尺寸；《拆开太和殿》（星球研究所，周苏琴审）。斗口、檐柱径、椽径、走兽尺寸、瓦陇距取自公开照片测量；举架与翼角按清工部《工程做法》推算；台基平面取自 OpenStreetMap，并以 Esri 卫星影像校正。殿内与周边建筑不在本次范围。</small>
+</div>
+<script src="vendor/three.min.js"></script>
+<script src="vendor/Sky.js"></script>
+<script src="vendor/OrbitControls.js"></script>
+<script src="vendor/BufferGeometryUtils.js"></script>
+<script src="vendor/MarchingCubes.js"></script>
+<script src="vendor/Pass.js"></script>
+<script src="vendor/CopyShader.js"></script>
+<script src="vendor/SimplexNoise.js"></script>
+<script src="vendor/SSAOShader.js"></script>
+<script src="vendor/SSAOPass.js"></script>
+<script src="src/params.js"></script>
+<script src="src/util.js"></script>
+<script src="src/paint.js"></script>
+<script src="src/dougong.js"></script>
+<script src="src/beasts.js"></script>
+<script src="src/stage.js"></script>
+<script src="src/hall.js"></script>
+<script src="src/terrace.js"></script>
+<script src="src/furnish.js"></script>
+<script>
+(async () => {
+  await document.fonts.load('900 100px "Noto Serif SC"').catch(() => {});
+  const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
+  const S = STAGE.init(Math.round(innerWidth * dpr), Math.round(innerHeight * dpr));
+  S.sun.shadow.mapSize.set(4096, 4096); Object.assign(S.sun.shadow.camera, { left: -105, right: 105, top: 105, bottom: -105, near: 1, far: 400 }); S.sun.shadow.camera.updateProjectionMatrix();
+  await new Promise(r => setTimeout(r, 30));
+  HALL.build(S.root); TER.build(S.root); FUR.build(S.root);
+  STAGE.tuneEnv(); STAGE.initPost(); STAGE.aim(new THREE.Vector3(0, 0, 15));
+  S.r.shadowMap.autoUpdate = false; S.r.shadowMap.needsUpdate = true;   // static scene: shadows once
+  document.getElementById('loading').remove();
+  const V = {
+    oblique: { pos: [-62, 6, 78], tgt: [0, 11, 0], fov: 35 }, front: { pos: [0, -1.3, 150], tgt: [0, 6, 0], fov: 30 },
+    corner: { pos: [24, 11.6, 31], tgt: [31.4, 9.7, 18.8], fov: 26 }, eave: { pos: [-4, 4.2, 25], tgt: [0, 8.2, 17.5], fov: 45 },
+    yuetai: { pos: [-14, 2.5, 66], tgt: [4, -1, 44], fov: 45 }, air: { pos: [-150, 80, 175], tgt: [0, 0, 0], fov: 30 },
+  };
+  const cam = S.cam, oc = new THREE.OrbitControls(cam, S.r.domElement);
+  oc.enableDamping = true; oc.dampingFactor = .08; oc.maxPolarAngle = Math.PI * .495; oc.minDistance = 3; oc.maxDistance = 420;
+  let dirty = true, tw = null;
+  const go = (k, instant) => {
+    const v = V[k], p0 = cam.position.clone(), t0 = oc.target.clone(), f0 = cam.fov, start = performance.now();
+    document.querySelectorAll('#views button[data-v]').forEach(b => b.classList.toggle('on', b.dataset.v === k));
+    tw = { v, p0, t0, f0, start, dur: instant ? 0 : 1400 };
+  };
+  oc.addEventListener('change', () => dirty = true);
+  addEventListener('resize', () => { const w = Math.round(innerWidth * dpr), h = Math.round(innerHeight * dpr); S.r.setSize(w, h, false); cam.aspect = w / h; cam.updateProjectionMatrix();
+    STAGE.post.rt.setSize(w, h); STAGE.post.ssao.setSize(w, h); dirty = true; });
+  document.querySelectorAll('#views button[data-v]').forEach(b => b.onclick = () => go(b.dataset.v));
+  document.getElementById('info').onclick = () => document.getElementById('panel').classList.toggle('hide');
+  go('oblique', true);
+  const loop = (now) => {
+    if (tw) {
+      const u = tw.dur ? Math.min(1, (now - tw.start) / tw.dur) : 1, e = u < .5 ? 4 * u * u * u : 1 - Math.pow(-2 * u + 2, 3) / 2;
+      cam.position.lerpVectors(tw.p0, new THREE.Vector3(...tw.v.pos), e); oc.target.lerpVectors(tw.t0, new THREE.Vector3(...tw.v.tgt), e);
+      cam.fov = tw.f0 + (tw.v.fov - tw.f0) * e; cam.updateProjectionMatrix(); dirty = true; if (u >= 1) tw = null;
+    }
+    oc.update();
+    if (dirty) { STAGE.renderPost(); dirty = false; }
+    requestAnimationFrame(loop);
+  };
+  requestAnimationFrame(loop);
+})();
+</script>
+</body></html>

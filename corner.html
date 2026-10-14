@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8"><title>太和殿 · 下檐翼角样片</title>
+<style>html,body{margin:0;background:#9fb6cc;overflow:hidden}</style></head>
+<body>
+<script src="vendor/three.min.js"></script>
+<script src="vendor/Sky.js"></script>
+<script src="vendor/OrbitControls.js"></script>
+<script src="vendor/BufferGeometryUtils.js"></script>
+<script src="vendor/MarchingCubes.js"></script>
+<script src="src/params.js"></script>
+<script src="src/util.js"></script>
+<script src="src/paint.js"></script>
+<script src="src/dougong.js"></script>
+<script src="src/beasts.js"></script>
+<script src="src/stage.js"></script>
+<script src="src/corner.js"></script>
+<script>
+const S = STAGE.init(1920, 1280);
+CORNER.build(S.root);
+STAGE.tuneEnv();
+const { Xc, Zc } = CORNER.info;
+const ground = U.mesh(new THREE.PlaneGeometry(200, 200), U.paint('#A7A196', .95)); ground.rotation.x = -Math.PI / 2; ground.position.y = -8.13;   // courtyard level below the three-tier terrace S.root.add(ground);
+STAGE.aim(new THREE.Vector3(Xc, 8, Zc));
+const V = (p, t, fov) => ({ pos: [Xc + p[0], p[1], Zc + p[2]], target: [Xc + t[0], t[1], Zc + t[2]], fov });
+STAGE.views = {
+  ref1: V([-18, -1.0, 26], [0.6, 8.5, 1.0], 10),      // from the south-west, low on the terrace — matches roof_art-1
+  paint: V([-6, 3.2, 9], [-2.2, 6.6, 0], 30),
+  beastsFar: V([-12, 3.0, 22], [1.1, 9.4, 1.2], 10),
+  qiang: V([-5, 6.5, 9], [-1.6, 9.6, -1.4], 22),
+  qiangClose: V([-2.6, 10.6, 4.2], [-1.2, 9.9, .9], 30),
+  beasts: V([-9, 4.5, 16], [0.8, 9.6, 0.9], 9),
+  under: V([-2.5, 5.2, 5.5], [0.6, 8.4, 0.8], 50),     // close underneath the corner brackets
+  side: V([10, 6.5, 10], [0.5, 8.5, 0.5], 40),        // along the diagonal
+  overview: V([-14, 12, 18], [-2, 8.5, -1], 40),
+};
+window.READY = true;
+if (!window.__CAPTURE__) { const v = STAGE.views.ref1; STAGE.look(v.pos, v.target, v.fov); STAGE.interactive(v.target); }
+</script>
+</body></html>

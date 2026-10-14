@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8"><title>斗拱测试</title>
+<style>html,body{margin:0;background:#888;overflow:hidden}</style></head>
+<body>
+<script src="vendor/three.min.js"></script>
+<script src="vendor/Sky.js"></script>
+<script src="vendor/OrbitControls.js"></script>
+<script src="vendor/BufferGeometryUtils.js"></script>
+<script src="src/params.js"></script>
+<script src="src/util.js"></script>
+<script src="src/dougong.js"></script>
+<script src="src/stage.js"></script>
+<script>
+const S = STAGE.init(1600, 1100), d = P.d();
+const ground = U.mesh(new THREE.PlaneGeometry(40, 40), U.paint('#9a968e', .9)); ground.rotation.x = -Math.PI / 2; ground.position.y = -1; S.root.add(ground);
+// three bracket sets on a run, the middle one a 柱头科
+const sp = .937;
+[-1, 0, 1].forEach((i, k) => { const g = DG.set(d, k % 2 ? U.COL.lv : U.COL.qing, k % 2 ? U.COL.qing : U.COL.lv, i === 0 ? 'zhu' : 'ping'); g.position.x = i * sp; S.root.add(g); });
+const runs = DG.runs(d, sp * 3); S.root.add(runs);
+STAGE.aim(new THREE.Vector3(0, .8, .4));
+STAGE.views = {
+  front: { pos: [0.4, 0.9, 3.4], target: [0, .8, .3], fov: 35 },
+  side: { pos: [3.2, 0.6, 1.6], target: [0, .8, .3], fov: 35 },
+  below: { pos: [1.4, -1.8, 2.6], target: [0, .8, .4], fov: 35 },
+};
+window.READY = true;
+if (!window.__CAPTURE__) { STAGE.look(STAGE.views.side.pos, STAGE.views.side.target); STAGE.interactive([0, .8, .3]); }
+</script>
+</body></html>

@@ -1,0 +1,4 @@
+# working renders and intermediates (out/ also holds comparisons that contain third-party reference photos — never publish those)
+out/
+__pycache__/
+*.pyc
