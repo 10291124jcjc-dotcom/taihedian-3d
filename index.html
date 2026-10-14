@@ -21,17 +21,23 @@
   #panel td:first-child { color: var(--mute); width: 82px; }
   #panel small { color: var(--mute); display: block; margin-top: 10px; font-size: 12px; }
   #panel.hide { display: none; }
+  #film { position: fixed; inset: 0; background: rgba(10,8,6,.92); display: none; place-items: center; z-index: 10; }
+  #film.show { display: grid; }
+  #film video { width: min(92vw, 160vh); max-height: 86vh; background: #000; box-shadow: 0 10px 40px rgba(0,0,0,.6); }
+  #film button { position: fixed; top: 18px; right: 22px; }
+  #title .by { margin-top: 6px; font-size: 13px; color: var(--mute); }
   #loading { position: fixed; inset: 0; display: grid; place-items: center; font-size: 18px; color: var(--mute); background: #1a1612; }
   @media (max-width: 760px) { #panel { width: auto; left: 16px; right: 16px; top: auto; bottom: 80px; max-height: 40vh; } #title h1 { font-size: 30px; } #views { left: 16px; } }
 </style></head>
 <body>
 <div id="loading">正在搭建太和殿……</div>
-<div id="title"><h1>太和殿</h1><p>按实测与档案数据用代码重建 · 拖动旋转，滚轮缩放</p><i></i></div>
+<div id="title"><h1>太和殿</h1><p>按实测与档案数据用代码重建 · 拖动旋转，滚轮缩放</p><i></i><div class="by">作者 @DDJCXX</div></div>
 <div id="views">
   <button data-v="oblique" class="on">斜角全景</button><button data-v="front">正立面</button><button data-v="corner">屋角走兽</button>
   <button data-v="eave">檐下斗拱</button><button data-v="yuetai">月台陈设</button><button data-v="air">三台鸟瞰</button>
-  <button id="info">数据与出处</button>
+  <button id="info">数据与出处</button><button id="play">观看短片</button>
 </div>
+<div id="film"><video id="filmv" src="video/taihedian_16x9.mp4" controls playsinline preload="none"></video><button id="close">关闭</button></div>
 <div id="panel" class="hide">
   <h2>主要尺寸</h2>
   <table>
@@ -96,6 +102,9 @@
     STAGE.post.rt.setSize(w, h); STAGE.post.ssao.setSize(w, h); dirty = true; });
   document.querySelectorAll('#views button[data-v]').forEach(b => b.onclick = () => go(b.dataset.v));
   document.getElementById('info').onclick = () => document.getElementById('panel').classList.toggle('hide');
+  const film = document.getElementById('film'), fv = document.getElementById('filmv');
+  document.getElementById('play').onclick = () => { film.classList.add('show'); fv.currentTime = 0; fv.play(); };
+  document.getElementById('close').onclick = () => { fv.pause(); film.classList.remove('show'); };
   go('oblique', true);
   const loop = (now) => {
     if (tw) {
